@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "cells": [
+    {
+      "type": "cs",
+      "input": "assist"
+    },
+    {
+      "type": "cs",
+      "input": "importFiles"
+    },
+    {
+      "type": "cs",
+      "input": "importFiles [ \".\\\\B.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "setupParse source_frames: [ \"nfs:\\\\C:\\\\Users\\\\Sarit\\\\.\\\\B.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "parseFiles\n  source_frames: [\"nfs:\\\\C:\\\\Users\\\\Sarit\\\\.\\\\B.csv\"]\n  destination_frame: \"B.hex\"\n  parse_type: \"CSV\"\n  separator: 44\n  number_columns: 13\n  single_quotes: false\n  column_names: [\"GoldPrice\",\"ma_20\",\"ma_100\",\"std_20\",\"std_100\",\"rsi\",\"bb_high_indicator\",\"bb_low_indicator\",\"26_ema\",\"12_ema\",\"macd\",\"CCI\",\"Index\"]\n  column_types: [\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\"]\n  delete_on_done: true\n  check_header: 1\n  chunk_size: 29423"
+    },
+    {
+      "type": "cs",
+      "input": "getFrameSummary \"B.hex\""
+    },
+    {
+      "type": "cs",
+      "input": "assist splitFrame, \"B.hex\""
+    },
+    {
+      "type": "cs",
+      "input": "splitFrame \"B.hex\", [0.9], [\"B.hex_0.90\",\"B.hex_0.10\"], 122989"
+    },
+    {
+      "type": "cs",
+      "input": "runAutoML"
+    },
+    {
+      "type": "cs",
+      "input": "runAutoML {\"training_frame\":\"B.hex_0.90\",\"response_column\":\"GoldPrice\",\"validation_frame\":\"B.hex_0.10\",\"seed\":-1,\"max_models\":0,\"max_runtime_secs\":3600,\"max_runtime_secs_per_model\":0,\"stopping_metric\":\"AUTO\",\"sort_metric\":null,\"stopping_rounds\":3,\"stopping_tolerance\":-1,\"nfolds\":5,\"balance_classes\":false,\"class_sampling_factors\":[],\"max_after_balance_size\":5,\"keep_cross_validation_predictions\":true,\"keep_cross_validation_models\":true,\"keep_cross_validation_fold_assignment\":false,\"export_checkpoints_dir\":\"\",\"ignored_columns\":[],\"exclude_algos\":[\"GLM\",\"DRF\",\"XGBoost\"],\"project_name\":\"Sarit_GoldPrice\"}"
+    },
+    {
+      "type": "cs",
+      "input": "getLeaderboard \"Sarit_GoldPrice\""
+    },
+    {
+      "type": "cs",
+      "input": "getModel \"GBM_2_AutoML_20190828_171259\""
+    },
+    {
+      "type": "cs",
+      "input": "getModel \"StackedEnsemble_BestOfFamily_AutoML_20190828_171259\""
+    },
+    {
+      "type": "raw",
+      "input": "getModel \"DeepLearning_1_AutoML_20190828_171259\""
+    }
+  ]
+}
